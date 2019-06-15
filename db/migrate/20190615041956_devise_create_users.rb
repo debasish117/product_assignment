@@ -36,6 +36,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
 
       t.string :username, unique: true
       t.string :role, default: "customer"
+      t.string :name
+      t.string :phone
+      t.string :city
+      t.string :country
 
 
       t.timestamps null: false

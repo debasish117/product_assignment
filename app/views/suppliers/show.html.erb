@@ -1,4 +1,29 @@
 <p id="notice"><%= notice %></p>
-
+<div id="supplier-info">
+  <div class="media">
+    <%= image_tag("fff.png", class: "mr-3") %>
+    <div class="media-body">
+      <h5 class="mt-0">Media heading</h5>
+      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+    </div>
+  </div>
+</div>
+<div id="supplier-products">
+  <div id="products-list-heading">Products</div>
+  <div class="card-deck grid-container">
+    <% @supplier.products.each do |product| %>
+      <div class="card grid-item">
+        <%= image_tag("fff.png") %>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 <%= link_to 'Edit', edit_supplier_path(@supplier) %> |
 <%= link_to 'Back', suppliers_path %>

@@ -1,0 +1,28 @@
+div#login-form, div#signup-form, div#forgot-password-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+ nav#app-nav {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+ }
+
+ .nav-options {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+ }
+
+ .nav-link {
+   margin: 5px 5px;
+ }
+
+ label.custom-file-label {
+   background-color: white;
+ }

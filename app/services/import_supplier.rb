@@ -8,5 +8,7 @@ class ImportSupplier
 
   def save
     Supplier.where(supplier_uid: supplier_uid, supplier_name: supplier_name).first_or_create
+  rescue => e
+    raise e.message
   end
 end

@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="app-nav">
+  <a class="navbar-brand" href="#">LOGO</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="nav-options">
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        <button type="button" class="btn btn-primary nav-link" data-toggle="modal" data-target="#exampleModalCenter">
+          Import
+        </button>
+        <%= render 'layouts/modal' %>
+        <%= link_to "Wipe Out", wipe_data_admin_dashboards_path, :method => 'delete', class: "btn btn-primary nav-link" %>
+      <% end %>
+      <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'btn btn-primary nav-link') %>
+    <% else %>
+      <% unless controller_name == 'sessions' && action_name == 'new' %>
+        <%= link_to('Login', new_user_session_path, class: 'btn btn-primary btn-lg btn-block nav-link') %>
+      <% end %>
+    <% end %>
+  </div>
+</nav>
