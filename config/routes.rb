@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root to: "suppliers#index"
-  resources :suppliers
+  resources :suppliers do
+    member do
+      get :toggle_products
+    end
+  end
   resources :products
   resources :admin_dashboards, only: [ :create ] do
     collection do

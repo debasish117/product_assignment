@@ -1,0 +1,12 @@
+<div class="card-deck grid-container">
+  <% @supplier_products.each_with_index do |product, index| %>
+    <div class="card grid-item">
+      <%= image_tag("fff.png") %>
+      <div class="card-body">
+      </div>
+      <div class="card-footer">
+        <medium class="text-muted">Product <%= index + 1 %></medium>
+      </div>
+    </div>
+  <% end %>
+</div>

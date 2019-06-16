@@ -1,6 +1,6 @@
 class SuppliersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_supplier, only: [:show, :edit, :update, :destroy]
+  before_action :set_supplier, only: [:show, :edit, :update, :destroy, :toggle_products]
 
   # GET /suppliers
   # GET /suppliers.json
@@ -11,6 +11,7 @@ class SuppliersController < ApplicationController
   # GET /suppliers/1
   # GET /suppliers/1.json
   def show
+    @supplier_products = @supplier.products.active
   end
 
   # GET /suppliers/new
@@ -59,6 +60,17 @@ class SuppliersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to suppliers_url, notice: 'Supplier was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle_products
+    if params[:checked]
+      @supplier_products = @supplier.products.inactive
+    else
+      @supplier_products = @supplier.products.active
+    end
+    respond_to do |format|
+      format.js
     end
   end
 

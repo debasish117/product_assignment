@@ -13,24 +13,44 @@
   <div id="products-list-heading">Products</div>
   <div class="supplier-products-checkbox">
     <div class="custom-control custom-switch">
-    <input class="custom-control-input" id="customSwitch" type="checkbox">
+    <input class="custom-control-input" id="customSwitch" type="checkbox" data-id="<%= @supplier.id %>">
     <span class="custom-control-track"></span>
-    <label class="custom-control-label" for="customSwitch">Show inactive products</label>
+    <label class="custom-control-label" for="customSwitch">Show Inactive Products</label>
   </div>
   </div>
+  <div id="replace">
   <div class="card-deck grid-container">
-    <% @supplier.products.each do |product| %>
+    <% @supplier_products.each_with_index do |product, index| %>
       <div class="card grid-item">
         <%= image_tag("fff.png") %>
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
         </div>
         <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
+          <medium class="text-muted">Product <%= product.id %></medium>
         </div>
       </div>
     <% end %>
   </div>
+  </div>
   <%= link_to 'Back', suppliers_path, class: 'btn btn-info' %>
 </div>
+
+<script type='text/javascript'>
+  $(document).ready(function(){
+    $('#customSwitch').click(function(){
+      var suppier_id = $(this).attr("data-id")
+      var checked = $(this).prop("checked");
+      if(checked) {
+        $.ajax({
+          url: `/suppliers/${suppier_id}/toggle_products`,
+          data: { checked: true }
+        })
+      }else{
+        $.ajax({
+          url: `/suppliers/${suppier_id}/toggle_products`,
+          data: { checked: false }
+        })
+      }
+    })
+  })
+</script>

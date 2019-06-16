@@ -6,7 +6,7 @@ class ImportProduct
     @product_title = args[:product_title]
     @category_id = args[:category_id]
     @price = args[:price]
-    @is_active = args[:is_active]
+    @is_active = args[:is_active].to_i
   end
 
   def save

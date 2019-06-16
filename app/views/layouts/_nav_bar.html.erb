@@ -10,7 +10,7 @@
           Import
         </button>
         <%= render 'layouts/modal' %>
-        <%= link_to "Wipe Out", wipe_data_admin_dashboards_path, :method => 'delete', class: "btn btn-primary nav-link" %>
+        <%= link_to "Wipe Out", wipe_data_admin_dashboards_path, 'data-confirm': 'Are you sure?', :method => 'delete', class: "btn btn-primary nav-link" %>
       <% end %>
       <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'btn btn-primary nav-link') %>
     <% else %>

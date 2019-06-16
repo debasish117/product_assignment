@@ -1,0 +1,2 @@
+$('#replace').html("<%= escape_javascript(render(partial: "toggle_products",
+locals: { :@supplier_products => @supplier_products })).html_safe %>")
