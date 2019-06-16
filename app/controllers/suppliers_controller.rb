@@ -64,11 +64,7 @@ class SuppliersController < ApplicationController
   end
 
   def toggle_products
-    if params[:checked]
-      @supplier_products = @supplier.products.inactive
-    else
-      @supplier_products = @supplier.products.active
-    end
+    @supplier_products = params[:checked] == "true" ? @supplier.products.inactive : @supplier.products.active
     respond_to do |format|
       format.js
     end
