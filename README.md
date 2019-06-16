@@ -7,7 +7,7 @@ application up and running.
 
 1. Ruby version 2.4.1
 2. Rails version 5.2.3
-3. DB ( postgresql version 10.1
+3. DB ( postgresql version 10.1 )
 
 **Initial Setup to be done**
 
