@@ -15,13 +15,22 @@ class CsvParser
 
   def process
     return false unless is_valid?
-    CSV.foreach(path, headers: true, encoding:'iso-8859-1:utf-8') do |row|
+    # Adjustment to support different file formats
+    (2..parsed_data.last_row).each do |i|
+      row = Hash[[get_headers, parsed_data.row(i)].transpose]
       category = ImportCategory.new(name: row['category']).save
       supplier = ImportSupplier.new(supplier_uid: row['supplier_id'], supplier_name: row['supplier_name']).save
       product = ImportProduct.new(product_uid: row['product_id'], product_title: row['product_title'], price: row['price'], is_active: row['is_active'], category_id: category.id).save
       ProductSupplier.create!(product_id: product.id, supplier_id: supplier.id)
       true
     end
+    # CSV.foreach(path, headers: true, encoding:'iso-8859-1:utf-8') do |row|
+    #   category = ImportCategory.new(name: row['category']).save
+    #   supplier = ImportSupplier.new(supplier_uid: row['supplier_id'], supplier_name: row['supplier_name']).save
+    #   product = ImportProduct.new(product_uid: row['product_id'], product_title: row['product_title'], price: row['price'], is_active: row['is_active'], category_id: category.id).save
+    #   ProductSupplier.create!(product_id: product.id, supplier_id: supplier.id)
+    #   true
+    # end
     rescue CSV::MalformedCSVError => e
       errors[:message] = 'Malformed CSV (' + e.message+ ')'
       false
@@ -37,21 +46,32 @@ class CsvParser
       false
   end
 
+  private
+
   def is_valid?
-    # check for valid file type
+    return valid_file_type? && valid_headers?
+  end
+
+  def parsed_data
+    @_parsed_data ||= Roo::Spreadsheet.open(path) if valid_file_type?
+  end
+
+  def get_headers
+    @_headers ||= parsed_data.row(1).compact
+  end
+
+  def valid_file_type?
     file_type = Rack::Mime.mime_type(File.extname(path))
-    unless VALID_FILE_TYPES.include?(file_type)
-      errors[:message] = "Invalid file, accepted file types are: .csv, .xls, .xlsx"
-      return false
-    end
-    # check for missing required headers
-    csv_data = CSV.read(path, { headers: true })
-    missing_headers = REQUIRED_HEADERS.reject{|header| csv_data.headers.include?(header)}
-    if missing_headers.present?
-      errors[:message] = "Missing required headers #{missing_headers.join(', ')}"
-      return false
-    end
-    true
+    return true if VALID_FILE_TYPES.include?(file_type) # NOTE(self): Returns true and gets out of method if condition is true, else returns false.
+    errors[:message] = "Invalid file, accepted file types are: .csv, .xls, .xlsx"
+    false
+  end
+
+  def valid_headers?
+    missing_headers = REQUIRED_HEADERS.reject{|header| get_headers.include?(header)}
+    return true unless missing_headers.present? # NOTE(self): Returns true and gets out of method if condition is true, else returns false.
+    errors[:message] = "Missing required headers #{missing_headers.join(', ')}"
+    false
   end
 
 end

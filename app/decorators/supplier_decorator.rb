@@ -1,8 +1,8 @@
 class SupplierDecorator < Draper::Decorator
   delegate_all
 
-  def active_products
-    
+  def address
+    contact.city + ',' + contact.country
   end
 
 end

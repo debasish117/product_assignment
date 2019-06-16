@@ -10,6 +10,10 @@ class User < ApplicationRecord
   validates :username, presence: :true, uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
+  has_one :contact, as: :contactable
+
+  accepts_nested_attributes_for :contact
+
   User::ROLES.each do |attr|
     define_method :"#{attr}?" do
       attr == role

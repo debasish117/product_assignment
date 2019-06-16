@@ -13,23 +13,27 @@
 
         <div class="field form-group">
           <%= f.label :email %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+          <%= f.email_field :email, autocomplete: "email", class: 'form-control' %>
         </div>
 
-        <div class="field form-group">
-          <%= f.label :phone %>
-          <%= f.text_field :phone, class: 'form-control' %>
-        </div>
+        <%= f.fields_for :contact do |contact| %>
+          <div class="field form-group">
+            <%= contact.label :phone %>
+            <%= contact.text_field :phone, class: 'form-control' %>
+          </div>
 
-        <div class="field form-group">
-          <%= f.label :city %>
-          <%= f.text_field :city, class: 'form-control' %>
-        </div>
+          <div class="field form-group">
+            <%= contact.label :city %>
+            <%= contact.text_field :city, class: 'form-control' %>
+          </div>
 
-        <div class="field form-group">
-          <%= f.label :country %>
-          <%= f.text_field :country, class: 'form-control' %>
-        </div>
+          <div class="field form-group">
+            <%= contact.label :country %>
+            <%= contact.text_field :country, class: 'form-control' %>
+          </div>
+        <% end %>
+
+
 
         <div class="field form-group">
           <%= f.label :username %>

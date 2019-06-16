@@ -6,4 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(email: 'admin@email.com', password: 'password', password_confirmation: "password", username: 'travis', role: 'admin')
+user = User.new(email: 'admin@email.com', password: 'password', password_confirmation: "password", username: 'travis', role: 'admin')
+user.build_contact(city: Faker::Address.city, country: Faker::Address.country, phone: Faker::PhoneNumber.cell_phone)
+user.save!

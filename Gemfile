@@ -18,6 +18,8 @@ gem 'material-sass', '4.1.1'
 gem 'jquery-rails'
 gem 'draper'
 gem "roo", "~> 2.8.0"
+gem 'roo-xls'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

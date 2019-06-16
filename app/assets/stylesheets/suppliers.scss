@@ -32,3 +32,10 @@ div#products-list-heading {
 .grid-item {
   text-align: center;
 }
+
+.supplier-products-checkbox {
+  position: relative;
+  top: -63px;
+  display: flex;
+  justify-content: flex-end;
+}

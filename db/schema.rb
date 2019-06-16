@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_15_041956) do
+ActiveRecord::Schema.define(version: 2019_06_15_201549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 2019_06_15_041956) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "phone"
+    t.string "city"
+    t.string "country"
+    t.integer "contactable_id"
+    t.string "contactable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id"
   end
 
   create_table "product_suppliers", force: :cascade do |t|
@@ -45,6 +56,7 @@ ActiveRecord::Schema.define(version: 2019_06_15_041956) do
   create_table "suppliers", force: :cascade do |t|
     t.integer "supplier_uid"
     t.string "supplier_name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["supplier_uid"], name: "index_suppliers_on_supplier_uid"
@@ -59,9 +71,6 @@ ActiveRecord::Schema.define(version: 2019_06_15_041956) do
     t.string "username"
     t.string "role", default: "customer"
     t.string "name"
-    t.string "phone"
-    t.string "city"
-    t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

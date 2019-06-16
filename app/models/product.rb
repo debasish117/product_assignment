@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   has_many :suppliers, through: :product_suppliers, source: 'supplier', dependent: :destroy
   belongs_to :category
 
+  validates :product_uid, presence: true 
+
   scope :active, ->  { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
 end

@@ -3,13 +3,21 @@
   <div class="media">
     <%= image_tag("fff.png", class: "mr-3") %>
     <div class="media-body">
-      <h5 class="mt-0">Media heading</h5>
-      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+      <h5 class="mt-0"><%= @supplier.supplier_name.upcase %></h5>
+      <div><%= @supplier.decorate.address %></div>
+      <div><%= @supplier.description %></div>
     </div>
   </div>
 </div>
 <div id="supplier-products">
   <div id="products-list-heading">Products</div>
+  <div class="supplier-products-checkbox">
+    <div class="custom-control custom-switch">
+    <input class="custom-control-input" id="customSwitch" type="checkbox">
+    <span class="custom-control-track"></span>
+    <label class="custom-control-label" for="customSwitch">Show inactive products</label>
+  </div>
+  </div>
   <div class="card-deck grid-container">
     <% @supplier.products.each do |product| %>
       <div class="card grid-item">
@@ -24,6 +32,5 @@
       </div>
     <% end %>
   </div>
+  <%= link_to 'Back', suppliers_path, class: 'btn btn-info' %>
 </div>
-<%= link_to 'Edit', edit_supplier_path(@supplier) %> |
-<%= link_to 'Back', suppliers_path %>

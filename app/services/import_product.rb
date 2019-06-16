@@ -10,8 +10,23 @@ class ImportProduct
   end
 
   def save
-    Product.where(product_uid: product_uid, product_title: product_title, category_id: category_id, price: price, is_active: is_active).first_or_create
+    existing_product = Product.find_by(product_uid: product_uid)
+    return existing_product if existing_product
+    new_product = Product.create(product_params)
+    new_product
   rescue => e
     raise e.message
+  end
+
+  private
+
+  def product_params
+    {
+      product_uid: product_uid,
+      product_title: product_title,
+      category_id: category_id,
+      price: price,
+      is_active: is_active
+    }
   end
 end
