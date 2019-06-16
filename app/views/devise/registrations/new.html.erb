@@ -26,14 +26,16 @@
             <%= contact.label :city %>
             <%= contact.text_field :city, class: 'form-control' %>
           </div>
-
+          <!--
+          # TODO: Css malfunction. The default style of drop down is overiding the material css.
+          -->
           <div class="field form-group">
             <%= contact.label :country %>
-            <%= contact.text_field :country, class: 'form-control' %>
+            <div class="form-control">
+              <%= contact.country_select :country, { selected: "IN", class: 'custom-select' } %>
+            </div>
           </div>
         <% end %>
-
-
 
         <div class="field form-group">
           <%= f.label :username %>

@@ -20,6 +20,7 @@ gem 'draper'
 gem "roo", "~> 2.8.0"
 gem 'roo-xls'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'country_select', '~> 4.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
