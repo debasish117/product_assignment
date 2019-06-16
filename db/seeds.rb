@@ -8,4 +8,8 @@
 
 user = User.new(email: 'admin@email.com', password: 'password', password_confirmation: "password", username: 'travis', role: 'admin')
 user.build_contact(city: Faker::Address.city, country: Faker::Address.country, phone: Faker::PhoneNumber.cell_phone)
-user.save!
+if user.save
+  puts "Created admin user email is - #{user.email}"
+else
+  puts "Something went wrong !"
+end
